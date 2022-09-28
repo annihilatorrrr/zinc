@@ -3,7 +3,10 @@ import requests
 
 user = "admin"
 password = "Complexpass#123"
-bas64encoded_creds = base64.b64encode(bytes(user + ":" + password, "utf-8")).decode("utf-8")
+bas64encoded_creds = base64.b64encode(
+    bytes(f"{user}:{password}", "utf-8")
+).decode("utf-8")
+
 
 
 data = {
@@ -19,9 +22,13 @@ data = {
     "Year": 2006
   }
 
-headers = {"Content-type": "application/json", "Authorization": "Basic " + bas64encoded_creds}
+headers = {
+    "Content-type": "application/json",
+    "Authorization": f"Basic {bas64encoded_creds}",
+}
+
 index = "games3"
 zinc_host = "http://localhost:4080"
-zinc_url = zinc_host + "/api/" + index + "/document"
+zinc_url = f"{zinc_host}/api/{index}/document"
 
 res = requests.put(zinc_url, headers=headers, data=json.dumps(data))

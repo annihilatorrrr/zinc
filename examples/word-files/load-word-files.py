@@ -16,8 +16,8 @@ def main():
 
     for file in f:
         print(file)
-        text = textract.process(folder + "/" + file)
-        text = text.decode("utf-8") 
+        text = textract.process(f"{folder}/{file}")
+        text = text.decode("utf-8")
         data = {
             "file": file,
             "text": text
